@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shocart/app_colors.dart';
 
 const black = Colors.black87;
 
 ThemeData defaultTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.deepOrange,
+    seedColor: AppColors.o_500,
     primary: Colors.white,
     secondary: black,
   ),
