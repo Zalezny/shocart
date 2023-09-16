@@ -7,7 +7,7 @@ ThemeData defaultTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.o_500,
-    primary: Colors.white,
+    primary: AppColors.o_500,
     secondary: black,
   ),
   textTheme: const TextTheme(
