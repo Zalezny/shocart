@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     context.read<AuthCubit>().getUser();
     return context.read<AuthCubit>().state.user != null
-        ? const CreatorPage()
+        ? CreatorPage()
         : BlocProvider(
             create: (context) => AuthFormCubit(),
             child: const AuthPage(),
