@@ -4,16 +4,24 @@ import 'package:shocart/bloc/auth_form_cubit/auth_form_cubit.dart';
 
 import 'widgets/auth_text_form_field.dart';
 
-class AuthPage extends StatelessWidget {
-  AuthPage({super.key});
+class AuthPage extends StatefulWidget {
+  const AuthPage({super.key});
 
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
   final _formKey = GlobalKey<FormState>();
+  bool _visiblePassword = false;
+
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final authCubit = context.read<AuthFormCubit>();
+    final authFormCubit = context.read<AuthFormCubit>();
 
     return Scaffold(
       body: SafeArea(
@@ -35,22 +43,32 @@ class AuthPage extends StatelessWidget {
                     text: 'Email',
                     controller: _emailController,
                     validator: (email) {
-                      if (authCubit.isValidEmail(email!)) {
+                      if (authFormCubit.isValidEmail(email!)) {
                         return null;
                       }
-                      return authCubit.state.emailError;
+                      return authFormCubit.state.emailError;
                     },
                   ),
                   AuthTextFormField(
                     controller: _passwordController,
                     text: 'Password',
+                    obscureText: !_visiblePassword,
+                    suffixIcon: IconButton(
+                      onPressed: () => setState(() {
+                        _visiblePassword = !_visiblePassword;
+                      }),
+                      icon: Icon(
+                        _visiblePassword ? Icons.visibility_off : Icons.visibility,
+                      ),
+                    ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 32),
-                      child: ElevatedButton(
-                        onPressed: _validateForm,
-                        child: const Text('Sign in'),
-                      ))
+                    padding: const EdgeInsets.symmetric(vertical: 32),
+                    child: ElevatedButton(
+                      onPressed: _validateForm,
+                      child: const Text('Sign in'),
+                    ),
+                  )
                 ],
               ),
             ),

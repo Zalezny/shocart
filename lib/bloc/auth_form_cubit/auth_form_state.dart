@@ -11,11 +11,7 @@ class AuthFormState {
   final String emailError;
   final bool? isEmailValid;
 
-  AuthFormState copyWith({
-    String? email,
-    String? emailError,
-    bool? isEmailValid,
-  }) {
+  AuthFormState copyWith({String? email, String? emailError, bool? isEmailValid, bool? unvisiblePassword}) {
     return AuthFormState(
       email: email ?? this.email,
       emailError: emailError ?? this.emailError,

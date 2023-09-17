@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AuthTextFormField extends StatelessWidget {
-  const AuthTextFormField({super.key, required this.text, this.validator, required this.controller});
+  const AuthTextFormField({super.key, required this.text, this.validator, required this.controller, this.obscureText, this.suffixIcon});
 
   final String text;
+  final bool? obscureText;
+  final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final TextEditingController controller;
 
@@ -14,7 +16,9 @@ class AuthTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         validator: validator,
+        obscureText: obscureText ?? false,
         decoration: InputDecoration(
+          suffixIcon: suffixIcon,
           labelText: text,
           border: const OutlineInputBorder(),
         ),
