@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shocart/bloc/auth_cubit/auth_cubit.dart';
 import 'package:shocart/bloc/auth_form_cubit/auth_form_cubit.dart';
+import 'package:shocart/utils/result.dart';
 
 import 'widgets/auth_text_form_field.dart';
 
@@ -82,7 +83,7 @@ class _AuthPageState extends State<AuthPage> {
   void _validateForm(context) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       final result = await BlocProvider.of<AuthCubit>(context).signIn(_emailController.text, _passwordController.text);
-      final snackBarText = result ? "Logged In" : "Sorry, but account probably doesnt exist";
+      final snackBarText = result is Success ? "Logged In" : (result as Failure).exception.toString();
       final snackBar = SnackBar(content: Text(snackBarText));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }

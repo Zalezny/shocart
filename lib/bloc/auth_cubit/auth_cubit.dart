@@ -18,14 +18,14 @@ class AuthCubit extends Cubit<AuthState> {
     return user;
   }
 
-  Future<bool> signIn(String email, String password) async {
+  Future<Result<String, Exception>> signIn(String email, String password) async {
     final result = await authRepo.signInWithEmailAndPassword(email, password);
     if (result is Success) {
       final User user = (result as Success).value;
       emit(AuthState(user: user));
-      return true;
+      return Success(user.uid);
     }
 
-    return false;
+    return Failure((result as Failure).exception);
   }
 }
