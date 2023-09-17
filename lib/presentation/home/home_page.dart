@@ -5,7 +5,6 @@ import 'package:shocart/bloc/auth_form_cubit/auth_form_cubit.dart';
 import 'package:shocart/presentation/auth/auth_page.dart';
 import 'package:shocart/presentation/creator/creator_page.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,6 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    context.read<AuthCubit>().getUser();
     return context.read<AuthCubit>().state.user != null
         ? const CreatorPage()
         : BlocProvider(

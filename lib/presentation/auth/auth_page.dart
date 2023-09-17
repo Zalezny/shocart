@@ -81,7 +81,7 @@ class _AuthPageState extends State<AuthPage> {
 
   void _validateForm(context) async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      final result = await context.read<AuthCubit>().signIn(_emailController.text, _passwordController.text);
+      final result = await BlocProvider.of<AuthCubit>(context).signIn(_emailController.text, _passwordController.text);
       final snackBarText = result ? "Logged In" : "Sorry, but account probably doesnt exist";
       final snackBar = SnackBar(content: Text(snackBarText));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
