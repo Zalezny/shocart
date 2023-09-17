@@ -4,5 +4,6 @@ import 'package:shocart/di/injectable.config.dart';
 
 final getIt = GetIt.instance;
 
-@InjectableInit()
+@injectableInit
 void configureDependencies() => getIt.init();
+

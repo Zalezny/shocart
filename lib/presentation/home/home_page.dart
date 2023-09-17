@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
         ? const CreatorPage()
         : BlocProvider(
             create: (context) => AuthFormCubit(),
-            child: AuthPage(),
+            child: const AuthPage(),
           );
   }
 }

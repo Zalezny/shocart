@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shocart/bloc/auth_cubit/auth_cubit.dart';
 import 'package:shocart/bloc/auth_form_cubit/auth_form_cubit.dart';
 
 import 'widgets/auth_text_form_field.dart';
@@ -65,7 +66,7 @@ class _AuthPageState extends State<AuthPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 32),
                     child: ElevatedButton(
-                      onPressed: _validateForm,
+                      onPressed: () => _validateForm(context),
                       child: const Text('Sign in'),
                     ),
                   )
@@ -78,7 +79,12 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
-  void _validateForm() {
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {}
+  void _validateForm(context) async {
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      final result = await context.read<AuthCubit>().signIn(_emailController.text, _passwordController.text);
+      final snackBarText = result ? "Logged In" : "Sorry, but account probably doesnt exist";
+      final snackBar = SnackBar(content: Text(snackBarText));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }
