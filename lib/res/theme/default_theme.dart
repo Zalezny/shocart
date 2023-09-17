@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shocart/app_colors.dart';
+import 'package:shocart/res/colors/app_colors.dart';
 
 const black = Colors.black87;
 

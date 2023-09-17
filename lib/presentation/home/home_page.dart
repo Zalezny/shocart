@@ -1,9 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shocart/pages/auth/auth_page.dart';
-import 'package:shocart/pages/auth/cubit/auth_form_cubit.dart';
-import 'package:shocart/pages/creator/creator_page.dart';
+import 'package:shocart/bloc/auth_cubit/auth_cubit.dart';
+import 'package:shocart/bloc/auth_form_cubit/auth_form_cubit.dart';
+import 'package:shocart/presentation/auth/auth_page.dart';
+import 'package:shocart/presentation/creator/creator_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,8 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    User? result = FirebaseAuth.instance.currentUser;
-    return result != null
+    return context.read<AuthCubit>().state.user != null
         ? const CreatorPage()
         : BlocProvider(
             create: (context) => AuthFormCubit(),

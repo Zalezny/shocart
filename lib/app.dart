@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shocart/bloc/auth_cubit/auth_cubit.dart';
 
-import 'pages/home/home_page.dart';
-import 'theme/default_theme.dart';
+import 'presentation/home/home_page.dart';
+import 'res/theme/default_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,7 +13,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'shocart',
       theme: defaultTheme,
-      home: const HomePage(),
+      home: BlocProvider(
+        create: (context) => AuthCubit(),
+        child: const HomePage(),
+      ),
     );
   }
 }

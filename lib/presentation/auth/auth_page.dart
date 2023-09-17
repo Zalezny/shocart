@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shocart/pages/auth/cubit/auth_form_cubit.dart';
+import 'package:shocart/bloc/auth_form_cubit/auth_form_cubit.dart';
 
 import 'widgets/auth_text_form_field.dart';
 
