@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shocart/bloc/auth_cubit/auth_cubit.dart';
 import 'package:shocart/bloc/auth_form_cubit/auth_form_cubit.dart';
+import 'package:shocart/bloc/search_cubit/creator_cubit.dart';
 import 'package:shocart/presentation/auth/auth_page.dart';
 import 'package:shocart/presentation/creator/creator_page.dart';
 
@@ -17,7 +18,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     context.read<AuthCubit>().getUser();
     return context.read<AuthCubit>().state.user != null
-        ? CreatorPage()
+        ? BlocProvider(
+            create: (context) => CreatorCubit(),
+            child: CreatorPage(),
+          )
         : BlocProvider(
             create: (context) => AuthFormCubit(),
             child: const AuthPage(),
