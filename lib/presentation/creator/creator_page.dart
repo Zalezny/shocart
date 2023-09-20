@@ -19,8 +19,11 @@ class _CreatorPageState extends State<CreatorPage> {
 
   final _productFocusNode = FocusNode();
 
-  final exampleSearchList = [];
-
+  final exampleSearchList = [
+    'bulki',
+    'bigos',
+    'biedra',
+  ];
 
   @override
   void dispose() {
@@ -44,7 +47,7 @@ class _CreatorPageState extends State<CreatorPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Hello!, Create your new list!',
+                      'Hello \nCreate your new list!',
                       style: GoogleFonts.roboto(
                         textStyle: Theme.of(context).textTheme.headlineSmall,
                       ),
@@ -86,10 +89,7 @@ class _CreatorPageState extends State<CreatorPage> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                            child: ActionChip(
-                              label: Text(exampleSearchList[index]),
-                              onPressed: () {},
-                            ),
+                            child: ActionChip(label: Text(exampleSearchList[index]), onPressed: () {}),
                           );
                         }),
                   ),
@@ -115,7 +115,7 @@ class _CreatorPageState extends State<CreatorPage> {
                         label: Text(state.products[index].name),
                         shape: const StadiumBorder(side: BorderSide()),
                         backgroundColor: Colors.transparent,
-                        onDeleted: () {},
+                        onDeleted: () => context.read<CreatorCubit>().removeProduct(state.products[index]),
                       );
                     },
                   )

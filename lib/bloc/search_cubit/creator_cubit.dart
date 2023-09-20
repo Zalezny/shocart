@@ -12,4 +12,9 @@ class CreatorCubit extends Cubit<CreatorState> {
     newShoppingList.insert(0, product);
     emit(state.copyWith(products: newShoppingList));
   }
+
+  void removeProduct(Product product) {
+    newShoppingList.removeWhere((element) => element.name == product.name);
+    emit(state.copyWith(products: newShoppingList));
+  }
 }
